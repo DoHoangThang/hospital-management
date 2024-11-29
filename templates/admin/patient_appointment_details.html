@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">LỊCH HẸN</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'admin_home' %}">Bảng điều khiển</a></li>
+    <li class="breadcrumb-item active">Xem lịch hẹn</li>
+    </ul>
+    </div>
+    
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card card-table">
+    <div class="card-body">
+        {% if messages %}
+        {% for message in messages %}
+         {% if message.tags == 'error' %}
+       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{message}}
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+         </button>
+          </div>
+       {% endif %}
+        {% endfor %}
+       {% endif %}
+           {% if messages %}
+        {% for message in messages %}
+         {% if message.tags == 'success' %}
+       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{message}}
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+         </button>
+          </div>
+       {% endif %}
+        {% endfor %}
+       {% endif %}
+    <div class="table-responsive">
+    <table class="table table-hover table-center mb-0 datatable">
+      {% for i in patientdetails %}
+      <tr><label style="font-size: medium;text-align: center;">Appointment Number: {{i.appointmentnumber}}</label></tr>
+        <tr>
+            
+            <th>Tên bệnh nhân</th>
+            <td>{{i.pat_id.admin.first_name}} {{i.pat_id.admin.last_name}}</td>
+            <th>Số điện thoại</th>
+            <td>{{i.pat_id.mobilenumber}}</td>
+          </tr>
+          <tr>
+            
+            <th>Email</th>
+            <td>{{i.pat_id.mobilenumber}}</td>
+            <th>Ngày hẹn</th>
+            <td>{{i.date_of_appointment}}</td>
+          </tr>
+          <tr>
+            
+            <th>Ngày và giờ</th>
+            <td>{{i.time_of_appointment}}</td>
+            <th>Tin nhắn</th>
+            <td>{{i.additional_msg}}</td>
+          </tr>
+          <tr>
+                              
+            {% if i.status == '0' %}
+            <th>Nhận xét của bác sĩ</th>
+            <td>Chưa cập nhật</td>
+            {% else %}
+            <tr>
+            <th>Nhận xét của bác sĩ</th>
+            <td>{{ i.remark}}</td>{% endif %}
+            
+              {% if i.status == '0' %}
+              <th>Trạng thái</th>
+              <td>Chưa cập nhật</td>
+              {% else %}
+              <th>Trạng thái</th>
+              <td>{{ i.status}}</td> {% endif %}
+              </tr>
+          
+            
+                
+    </table>
+    {% endfor %}
+ 
+    
+              </div>
+            
+              
+                        </div>
+    
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+{% endblock %}

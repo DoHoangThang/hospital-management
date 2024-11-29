@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Danh sách bệnh nhân</title>
+  </head>
+  <body>
+    <h1>Danh sách bệnh nhân</h1>
+    <ul>
+      {% for patient in patients %}
+      <li>
+        {{ patient.first_name }} {{ patient.last_name }} - {{
+        patient.date_of_birth }} - {{ patient.phone }}
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="/">Trở lại trang chủ</a>
+  </body>
+</html>

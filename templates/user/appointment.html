@@ -1,0 +1,183 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="content container-fluid">
+  {% if user.user_type == '1' %}
+  <div class="page-header">
+    <div class="row">
+      <div class="col">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'admin_home' %}">Bảng điều khiển</a>
+          </li>
+          <li class="breadcrumb-item active">Đặt lịch khám</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% elif user.user_type == '2' %}
+  <div class="page-header">
+    <div class="row">
+      <div class="col">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'doctor_home' %}">Bảng điều khiển</a>
+          </li>
+          <li class="breadcrumb-item active">Đặt lịch khám</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="page-header">
+    <div class="row">
+      <div class="col">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'userhome' %}">Bảng điều khiển</a>
+          </li>
+          <li class="breadcrumb-item active">Đặt lịch khám</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Đặt lịch khám</h5>
+        </div>
+        <div class="card-body">
+          {% if messages %} {% for message in messages %} {% if message.tags ==
+          'error' %}
+          <div
+            class="alert alert-warning alert-dismissible fade show"
+            role="alert"
+          >
+            {{message}}
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %} {% endif %} {% if messages %} {% for message in messages
+          %} {% if message.tags == 'success' %}
+          <div
+            class="alert alert-warning alert-dismissible fade show"
+            role="alert"
+          >
+            {{message}}
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endif %} {% endif %}
+          <form
+            method="POST"
+            action="{% url 'patientappointment' %}"
+            enctype="multipart/form-data"
+          >
+            {% csrf_token %}
+            <div class="form-group row">
+              <label class="col-form-label col-md-2">Chuyên khoa</label>
+              <div class="col-md-10">
+                <select
+                  name="spec_id"
+                  class="form-control"
+                  required="true"
+                  id="specialization"
+                >
+                  <option value="">Chọn chuyên khoa</option>
+                  {% for i in specialization %}
+
+                  <option value="{{i.id}}">{{i.sname}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-md-2">Bác sĩ</label>
+              <div class="col-md-10">
+                <select
+                  class="form-control"
+                  name="doctor_id"
+                  id="doctor"
+                  required="required"
+                >
+                  <option value="">Chọn bác sĩ</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-md-2">Ngày</label>
+              <div class="col-md-10">
+                <input
+                  type="date"
+                  class="form-control"
+                  name="date_of_appointment"
+                  required="True"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-md-2">Thời gian</label>
+              <div class="col-md-10">
+                <input
+                  type="time"
+                  class="form-control"
+                  required="True"
+                  name="time_of_appointment"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-md-2">Tin nhắn</label>
+              <div class="col-md-10">
+                <textarea class="form-control" name="additional_msg"></textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <button type="submit" class="btn btn-dark">Cập nhật</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#specialization").change(function () {
+      var sid = $(this).val();
+      $.ajax({
+        url: "/get_doctor/",
+        type: "GET",
+        data: {
+          s_id: sid,
+        },
+        success: function (data) {
+          var doctoroptions = data.doctor_options;
+          $("#doctor").html(doctoroptions);
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+        },
+      });
+    });
+  });
+</script>
+
+{% endblock %}

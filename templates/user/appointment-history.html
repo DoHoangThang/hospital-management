@@ -1,0 +1,150 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="content container-fluid">
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">XEM LỊCH HẸN</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'userhome' %}">Bảng điều khiển</a>
+          </li>
+          <li class="breadcrumb-item active">Lịch sử hẹn khám</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card card-table">
+        <div class="card-body">
+          {% if messages %} {% for message in messages %} {% if message.tags ==
+          'error' %}
+          <div
+            class="alert alert-warning alert-dismissible fade show"
+            role="alert"
+          >
+            {{ message }}
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %} {% endif %} {% if messages %} {% for message in messages
+          %} {% if message.tags == 'success' %}
+          <div
+            class="alert alert-warning alert-dismissible fade show"
+            role="alert"
+          >
+            {{message}}
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endif %} {% endif %} {% if vah %}
+          <div class="table-responsive">
+            <table class="table table-hover table-center mb-0 datatable">
+              <thead>
+                <tr>
+                  <th>Mã cuộc hẹn</th>
+                  <th>Tên bác sĩ</th>
+                  <th>Phí tư vấn</th>
+                  <th>Ngày hẹn</th>
+                  <th>Giờ hẹn</th>
+                  <th>Ngày tạo</th>
+                  <th>Trạng thái</th>
+                  <th class="text-right">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for appointment in vah %}
+                <tr>
+                  <td>{{ appointment.appointmentnumber }}</td>
+                  <td>{{ appointment.doctor_id.admin.first_name }}</td>
+                  <td>{{ appointment.doctor_id.fee }}</td>
+                  <td>{{ appointment.date_of_appointment }}</td>
+                  <td>{{ appointment.time_of_appointment }}</td>
+                  <td>{{ appointment.created_at }}</td>
+                  {% if appointment.status == '0' %}
+                  <td>Chưa cập nhật</td>
+                  {% else %}
+                  <td>{{ appointment.status}}</td>
+                  {% endif %}
+                  <td class="text-right">
+                    <div class="actions">
+                      <td
+                        class="text-right"
+                        style="
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                          height: 100%;
+                        "
+                      >
+                        <form
+                          action="{% url 'cancel_appointment' appointment.id %}"
+                          method="POST"
+                          style="display: inline"
+                        >
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger">
+                            Hủy
+                          </button>
+                        </form>
+                      </td>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+            <p>Không có lịch sử cuộc hẹn.</p>
+            {% endif %}
+
+            <!-- Pagination controls -->
+            <div
+              class="pagination"
+              style="
+                padding-top: 20px;
+                padding-bottom: 20px;
+                text-align: center;
+              "
+            >
+              <span class="step-links">
+                {% if view_appointment.has_previous %}
+                <a href="?page=1">&laquo; Đầu tiên</a>
+                <a href="?page={{ view_appointment.previous_page_number }}"
+                  >Trước</a
+                >
+                {% endif %} {% comment %}
+                <span class="current">
+                  Trang {{ view_appointment.number }} of {{
+                  view_appointment.paginator.num_pages }}.
+                </span>
+                {% endcomment %} {% if view_appointment.has_next %}
+                <a href="?page={{ view_appointment.next_page_number }}">Next</a>
+                <a href="?page={{ view_appointment.paginator.num_pages }}"
+                  >Cuối cùng &raquo;</a
+                >
+                {% endif %}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

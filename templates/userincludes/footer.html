@@ -1,0 +1,93 @@
+{% load static %}
+<!-- Footer Start -->
+
+<footer class="footer section gray-bg" style="background-color: #f5f5ff">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mr-auto col-sm-6">
+        <div class="widget mb-5 mb-lg-0">
+          <div class="logo mb-4">
+            <h3>Bệnh viện HT</h3>
+          </div>
+          <p>{{page.aboutus|slice:":250"}}.</p>
+
+          <ul class="list-inline footer-socials mt-4">
+            <li class="list-inline-item">
+              <a href="https://www.facebook.com/do.hoangthang.2010/"
+                ><i class="icofont-facebook"></i
+              ></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://x.com/ThngHon31022815"
+                ><i class="icofont-twitter"></i
+              ></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.youtube.com/@thangacoustic8712"
+                ><i class="icofont-youtube-play"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6 col-sm-6">
+        <div class="widget mb-5 mb-lg-0">
+          <h4 class="text-capitalize mb-3">Liên kết nhanh</h4>
+          <div class="divider mb-4"></div>
+
+          <ul class="list-unstyled footer-menu lh-35">
+            <li><a href="{% url 'index' %}">Trang chủ </a></li>
+            <li><a href="{% url 'login' %}">Quản trị viên</a></li>
+            <li><a href="{% url 'docsignup' %}">Bác sĩ</a></li>
+            <li><a href="{% url 'patreg' %}">Người dùng</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="widget widget-contact mb-5 mb-lg-0">
+          <h4 class="text-capitalize mb-3">Liên hệ với chúng tôi</h4>
+          <div class="divider mb-4"></div>
+
+          <div class="footer-contact-block mb-4">
+            <div class="icon d-flex align-items-center">
+              <i class="icofont-email mr-3"></i>
+              <span class="h6 mb-0">Trung tâm dịch vụ khách hàng 24/7</span>
+            </div>
+            <h4 class="mt-2"><a href="tel:+23-345-67890">{{page.email}}</a></h4>
+          </div>
+
+          <div class="footer-contact-block">
+            <div class="icon d-flex align-items-center">
+              <i class="icofont-support mr-3"></i>
+              <span class="h6 mb-0">Thứ 2 - Thứ 7: 08:00 - 17:00</span>
+            </div>
+            <h4 class="mt-2">
+              <a href="tel:+23-345-67890">{{page.mobilenumber}}</a>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-btm py-4 mt-5">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-lg-6">
+          <div class="copyright">
+            Copyright ©2024 - Bản quyền thuộc về
+            <span class="text-color">Bệnh viện HT</span> - Phát triển bởi DHT
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <a class="backtop js-scroll-trigger" href="#top">
+            <i class="icofont-caret-up"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

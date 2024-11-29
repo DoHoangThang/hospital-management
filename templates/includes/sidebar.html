@@ -1,0 +1,163 @@
+{% load static %} {% if user.user_type == '1' %}
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-inner slimscroll">
+    <div id="sidebar-menu" class="sidebar-menu">
+      <ul>
+        <li class="menu-title">
+          <span>Menu chính</span>
+        </li>
+
+        <li>
+          <a href="{% url 'admin_home' %}"
+            ><i class="fas fa-file"></i> <span>Bảng điều khiển</span></a
+          >
+        </li>
+        <li class="submenu">
+          <a href="#"
+            ><i class="fas fa-file"></i> <span>Chuyên khoa</span>
+            <span class="menu-arrow"></span
+          ></a>
+          <ul>
+            <li><a href="{% url 'add_specilizations' %}">Thêm</a></li>
+            <li><a href="{% url 'manage_specilizations' %}">Quản lý</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{% url 'viewdoctorlist' %}"
+            ><i class="fas fa-users"></i> <span>Danh sách bác sĩ</span></a
+          >
+        </li>
+        <li>
+          <a href="{% url 'regusers' %}"
+            ><i class="fa fa-file"></i> <span>Người dùng đã đăng ký</span></a
+          >
+        </li>
+        <li>
+          <a href="{% url 'search_doctor' %}"
+            ><i class="fas fa-search"></i> <span>Tìm bác sĩ</span></a
+          >
+        </li>
+        <li>
+          <a href="{% url 'doctor_between_date_report' %}"
+            ><i class="fa fa-file"></i> <span>Báo cáo đăng ký bác sĩ</span></a
+          >
+        </li>
+        <li>
+          <a href="{% url 'website_update' %}"
+            ><i class="fas fa-cog"></i> <span>Trang Web</span></a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% elif user.user_type == '2' %}
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-inner slimscroll">
+    <div id="sidebar-menu" class="sidebar-menu">
+      <ul>
+        <li class="menu-title">
+          <span>Menu chính</span>
+        </li>
+
+        <li>
+          <a href="{% url 'doctor_home' %}"
+            ><i class="fa fa-file"></i> <span>Bảng điều khiển</span></a
+          >
+        </li>
+        <li class="submenu">
+          <a href="#"
+            ><i class="fas fa-chalkboard-teacher"></i> <span>Lịch hẹn</span>
+            <span class="menu-arrow"></span
+          ></a>
+          <ul>
+            <li>
+              <a href="{% url 'patientnewappointment' %}">Lịch hẹn mới</a>
+            </li>
+            <li>
+              <a href="{% url 'patientapprovedappointment' %}"
+                >Lịch hẹn được duyệt</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'patientcancelledappointment' %}"
+                >Lịch hẹn bị hủy</a
+              >
+            </li>
+            <li><a href="{% url 'view_appointment' %}">Tất cả lịch hẹn</a></li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#"
+            ><i class="fas fa-chalkboard-teacher"></i> <span>Bệnh nhân</span>
+            <span class="menu-arrow"></span
+          ></a>
+          <ul>
+            <li><a href="{% url 'add_patient' %}">Thêm bệnh nhân</a></li>
+            <li><a href="{% url 'manage_patient' %}">Quản lý bệnh nhân</a></li>
+          </ul>
+        </li>
+
+        <li class="submenu">
+          <a href="#"
+            ><i class="fas fa-search"></i> <span>Tìm kiếm</span>
+            <span class="menu-arrow"></span
+          ></a>
+          <ul>
+            <li>
+              <a href="{% url 'search_appointment' %}">Tìm kiếm lịch hẹn</a>
+            </li>
+            <li><a href="{% url 'search_patient' %}">Tìm kiếm bệnh nhân</a></li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#"
+            ><i class="fas fa-file"></i> <span>Báo cáo</span>
+            <span class="menu-arrow"></span
+          ></a>
+          <ul>
+            <li>
+              <a href="{% url 'between_date_report' %}">Báo cáo lịch hẹn</a>
+            </li>
+            <li>
+              <a href="{% url 'between_date_patient_report' %}"
+                >Báo cáo bệnh nhân</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% else %}
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-inner slimscroll">
+    <div id="sidebar-menu" class="sidebar-menu">
+      <ul>
+        <li class="menu-title">
+          <span>Menu chính</span>
+        </li>
+
+        <li>
+          <a href="{% url 'userhome' %}"
+            ><i class="fa fa-file"></i> <span>Bảng điều khiển</span></a
+          >
+        </li>
+        <li>
+          <a href="{% url 'patientappointment' %}"
+            ><i class="fas fa-edit"></i> <span>Đặt lịch khám</span></a
+          >
+        </li>
+        <li>
+          <a href="{% url 'view_appointment_history' %}"
+            ><i class="fas fa-file"></i> <span>Lịch sử hẹn khám</span></a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endif %}

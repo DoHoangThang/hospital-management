@@ -1,0 +1,80 @@
+{% load static %}
+
+<header>
+  <div class="header-top-bar">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <ul class="top-bar-info list-inline-item pl-0 mb-0">
+            <li class="list-inline-item">
+              <a href="mailto:support@gmail.com"
+                ><i class="icofont-support-faq mr-2"></i>{{page.email}}</a
+              >
+            </li>
+            <li class="list-inline-item">
+              <i class="icofont-location-pin mr-2"></i>{{page.address}}
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-6">
+          <div class="text-lg-right top-right-bar mt-2 mt-lg-0">
+            <a href="tel:+23-345-67890">
+              <span>Gọi Ngay: </span>
+              <span class="h4">{{page.mobilenumber}}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-lg navigation" id="navbar">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <h4>Bệnh viện HT</h4>
+      </a>
+
+      <button
+        class="navbar-toggler collapsed"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarmain"
+        aria-controls="navbarmain"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="icofont-navigation-menu"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarmain">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'index' %}">TRANG CHỦ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">QUẢN TRỊ VIÊN</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'docsignup' %}">BÁC SĨ ĐĂNG KÝ</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'login' %}" class="nav-link">BÁC SĨ ĐĂNG NHẬP</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'patreg' %}" class="nav-link">NGƯỜI DÙNG</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'doctor' %}">BÁC SĨ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'aboutus' %}">GIỚI THIỆU</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contactus' %}">LIÊN HỆ</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
